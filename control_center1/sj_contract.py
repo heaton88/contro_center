@@ -6,11 +6,18 @@
 
 import requests
 import json
+from config_control import sj_list,login,access_header
+
+
+access_token = login()[0]
+refresh_token = login()[1]
+userid = login()[2]
+orgid = login()[3]
 
 
 org_url = 'http://k8sdev.golowo.com/g3-orgcenter-web/org/querySecondaryOrgTreeData'
 
-infolist = json.loads(requests.get(org_url).content)['data'][0]['children']
+infolist = json.loads(requests.get(org_url,headers=access_header('json')).content)['data'][0]['children']
 code_list = []
 name_list = []
 org_list = []
@@ -30,15 +37,16 @@ month_list = []
 
 for j in range(0,len(code_list)):
     sign_url = 'http://k8sdev.golowo.com/g3-screen-web/manageCenter/queryContractAmount?orgCode='+org_list[j]+','+code_list[j]+'&customerCode='
-    year_status = requests.get(sign_url).status_code
+    year_status = requests.get(sign_url,headers=access_header('json')).status_code
 
     if year_status != 200:
         print(name_list[j],"接口报错")
     else:
-        data_status = json.loads(requests.get(sign_url).content)['data']['monthAmountDataVoList']
+        data_status = json.loads(requests.get(sign_url,headers=access_header('json')).content)['data']['monthAmountDataVoList']
+        datas_status = json.loads(requests.get(sign_url,headers=access_header('json')).content)['data']
         if data_status != []:
-            yearamount = json.loads(requests.get(sign_url).content)['data']['yearAmount']
-            monthamount = json.loads(requests.get(sign_url).content)['data']['monthAmount']
+            yearamount = datas_status['yearAmount']
+            monthamount = datas_status['monthAmount']
             print(name_list[j],yearamount)
             year_list.append(yearamount)
             month_list.append(monthamount)

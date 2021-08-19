@@ -6,6 +6,8 @@
 import requests
 import json
 import openpyxl
+from config_control import login,access_header
+
 
 wb = openpyxl.Workbook()
 filename = '接口报错.xlsx'
@@ -17,10 +19,10 @@ ws1['C1'] = '年度产值'
 
 customer_url = 'http://k8sdev.golowo.com/g3-enterprisecenter-web/customer/searchCustomerList'
 payload = {"size": 100000000}
-headers = {
-    "Accept": "application/json, text/plain, */*",
-    "Content-Type": "application/json;charset=UTF-8",
-}
+# headers = {
+#     "Accept": "application/json, text/plain, */*",
+#     "Content-Type": "application/json;charset=UTF-8",
+# }
 id_list = []
 code_list = []
 name_list = []
@@ -29,7 +31,7 @@ customer_month = []
 
 customer_list = []
 
-customer_rep = requests.post(customer_url,data=json.dumps(payload),headers=headers)
+customer_rep = requests.post(customer_url,data=json.dumps(payload),headers=access_header('json'))
 customer_json = json.loads(customer_rep.content)['data']['items']
 
 # print(customer_json)
@@ -46,10 +48,9 @@ for j in range(0,len(id_list)):
                          id_list[j]+','+id_list[j]
     s = requests.session()
     s.keep_alive = False
-    customer_re = requests.get(customer_value_url,timeout=None)
+    customer_re = requests.get(customer_value_url,headers=access_header('json'),timeout=None)
     if customer_re.status_code != 200:
         print(name_list[j],"接口报错")
-
 
     else:
         for l in range(2,len(id_list)):
