@@ -97,10 +97,5 @@ def customer_list():
         id_list.append(customer_json[i]['id'])
         code_list.append(customer_json[i]['code'])
         name_list.append(customer_json[i]['name'])
-    # print(id_list)
-    # print(name_list)
-    # print(code_list)
-    return id_list,code_list,name_list
 
-# customer_list()
-# application/json;charset=UTF-8
+    return id_list,code_list,name_list

@@ -19,10 +19,7 @@ ws1['C1'] = '年度产值'
 
 customer_url = 'http://k8sdev.golowo.com/g3-enterprisecenter-web/customer/searchCustomerList'
 payload = {"size": 100000000}
-# headers = {
-#     "Accept": "application/json, text/plain, */*",
-#     "Content-Type": "application/json;charset=UTF-8",
-# }
+
 id_list = []
 code_list = []
 name_list = []
