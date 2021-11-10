@@ -19,7 +19,8 @@ class Get_url:
     def __init__(self,sjurl):
         self.sjurl = sjurl
         for i in range(len(code_list)):
-            outputvalue_rank_url = self.sjurl+org_list[i]+','+code_list[i]+'&customerCode='
+            #outputvalue_rank_url = self.sjurl+org_list[i]+','+code_list[i]+'&customerCode='
+            outputvalue_rank_url = self.sjurl
             outputvalue_rank_url_rep = requests.get(outputvalue_rank_url,headers=access_header('json')).status_code
             outputvalue_rank_url_con = requests.get(outputvalue_rank_url).content
             if outputvalue_rank_url_rep != 200:
@@ -31,4 +32,4 @@ class Get_url:
         print(len(rep_list))
 
 
-Get_url('http://k8sdev.golowo.com/g3-screen-web/manageCenter/queryOutputValuePercentage?orgCode=')
+Get_url('http://k8sdev.golowo.com/g3-screen-web/pingming/qualitymanagement/getDayCheckData?orgCode=')

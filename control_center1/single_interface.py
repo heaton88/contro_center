@@ -5,14 +5,24 @@
 
 import requests
 import json
-from config_control import login,access_header
+from config_control import access_header,login
 
-interface_url = 'http://k8sdev.golowo.com/g3-screen-web/manageCenter/queryProjectStatics'
-payload = {"orgCode": "-6944734322880132047,0100000000",
-           "customerCode": "",
-           "groupLevel": "province",
-           "type": "china"}
+interface_url = 'http://k8sdev.golowo.com/g3-antiepidemic-web/statichealth/queryProjectReportPercent'
+project_info = []
+records_list = []
+project_id = []
+for i in range(1,5):
+    payload = {
+        "orgId": "-6944734322880132047",
+        "pageReq": {
+                "pageSize": 500,
+                "pageNumber": i
+                        },
+        "createtime": '2021-09-23'
+    }
 
-
-interface_rep = requests.post(interface_url,data=json.dumps(payload),headers=access_header('json')).content
-print(interface_rep)
+    interface_rep = requests.post(interface_url,data=json.dumps(payload),headers=access_header('json'))
+    records_info = interface_rep.json()['data']['records']
+    for j in range(0,len(records_list)):
+        project_id.append(records_info[j]['projectId'])
+print(project_id)
