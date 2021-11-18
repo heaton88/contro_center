@@ -7,7 +7,7 @@ import json
 import requests
 
 def login():
-    login_url = 'https://k8sdev.golowo.com/g3-authcenter-web/oauth/token'
+    login_url = 'https://k8stest.golowo.com/g3-authcenter-web/oauth/token'
     login_header = {
         'authorization': 'Basic ZzNwY2M6aXh1NHJNSUw=',
         'content-type': 'application/x-www-form-urlencoded'
@@ -22,7 +22,7 @@ def login():
 
 print(login()[0])
 
-api_url = 'https://k8sdev.golowo.com/g3-projectcenter-web/project/queryList'
+api_url = 'https://k8stest.golowo.com/g3-projectcenter-web/project/queryList'
 api_header = {
     'content-type': 'application/json;charset=UTF-8',
     'authorization': 'Bearer ' + login()[0]

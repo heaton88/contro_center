@@ -7,9 +7,14 @@
 import requests
 import json
 
+#登录账号及密码
 login_data = 'username=13332201206&password=123456&grant_type=password&userType=labormng'
+#获取token接口链接
 login_url = 'https://k8stest.golowo.com/g3-authcenter-web/oauth/token'
+#指挥大屏防疫实时数据--健康上报同步数据接口
+sync_url = 'https://k8stest.golowo.com/g3-antiepidemic-web/statichealth/trigger?'
 
+#登录接口所需header
 def login_header(act):
     if act == 'form':
         form_header = {
@@ -23,7 +28,7 @@ def login_header(act):
             'content-type': 'application/json'}
         return json_header
 
-
+#登录获取token,refresh token 以及用户id和组织id
 def login_screeen():
     login_rep = requests.post(login_url,data=login_data,headers=login_header('form'))
     access_token = login_rep.json()['access_token']
@@ -32,11 +37,13 @@ def login_screeen():
     orgid = login_rep.json()['orgId']
     return access_token,refresh_token,userid,orgid
 
+#取值token refresh token 以及用户id和组织id
 access_token = login_screeen()[0]
 refresh_token = login_screeen()[1]
 userid = login_screeen()[2]
 orgid = login_screeen()[3]
 
+#获取token后，其他接口测试的header，内置登录后的token，后续调取api直接使用。
 def access_header(act):
     if act == 'form':
         form_header = {
@@ -57,6 +64,7 @@ def access_header(act):
         }
         return json_header
 
+#获取三局所有分公司的组织id及组织code
 def sj_list():
     org_url = 'http://k8stest.golowo.com/g3-orgcenter-web/org/querySecondaryOrgTreeData?orgId='+orgid
 
@@ -80,15 +88,10 @@ def sj_list():
 code_list = sj_list()[0]
 name_list = sj_list()[1]
 org_list = sj_list()[2]
-print(code_list)
-print(org_list)
 
-print(org_list)
-print(code_list)
-print(name_list)
 
 #
-#
+#获取三局级别所有客户列表信息（客户id及客户code）
 def customer_list():
     customer_url = 'http://k8stest.golowo.com/g3-enterprisecenter-web/customer/searchCustomerList'
     payload = {"size": 100000000}
