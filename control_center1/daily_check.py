@@ -7,6 +7,7 @@ import requests
 import json
 from config_control import access_header,customer_list,code_list,name_list,org_list,orgid
 
+#日检接口全量数据测试
 customer_id_list = customer_list()[0]
 customer_code_list = customer_list()[1]
 customer_name_list = customer_list()[2]
