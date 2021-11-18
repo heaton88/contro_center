@@ -7,7 +7,7 @@ import requests
 import json
 from config_control import access_header,login
 
-interface_url = 'http://k8sdev.golowo.com/g3-antiepidemic-web/statichealth/queryProjectReportPercent'
+interface_url = 'http://k8stest.golowo.com/g3-antiepidemic-web/statichealth/queryProjectReportPercent'
 project_info = []
 records_list = []
 project_id = []
