@@ -3,6 +3,7 @@
 # _date_: 2021/11/18 9:41 上午
 # _FileName_: synchronization_data.py
 
+#指挥大屏防疫实时巡检数据更新
 import requests
 import time
 from config_control import login_screeen,access_header,sync_url
