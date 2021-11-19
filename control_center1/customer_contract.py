@@ -5,7 +5,7 @@
 
 import requests
 import json
-from config_control import access_header
+from config_control import *
 
 
 customer_url = 'http://k8stest.golowo.com/g3-enterprisecenter-web/customer/searchCustomerList'

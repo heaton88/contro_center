@@ -6,13 +6,18 @@
 #飞行检查接口全量数据测试
 import requests
 import json
-from config_control import access_header,orgid,org_list,code_list,name_list
+
+from config_control import *
+
+# login_screen()
+# sj_list()
+
 
 #日检接口
 daily_url = 'https://k8stest.golowo.com/g3-screen-web/pingming/qualitymanagement/getDayCheckData'
 #周检接口
 weekly_url = 'https://k8stest.golowo.com/g3-screen-web/pingming/safemanagement/getDayCheckData'
-for i in range(0,len(orgid)):
+for i in range(0,len(org_list)):
     #所有分公司，日检检查数量总和
     datas = {'orgCode':org_list[i] + ',' + code_list[i],'customerCode': ""}
     daily_rep = requests.post(weekly_url,headers=access_header('json'),data=json.dumps(datas))

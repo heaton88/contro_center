@@ -6,16 +6,10 @@
 
 import requests
 import json
-from config_control import sj_list,login,access_header
+from config_control import *
 
 
-access_token = login()[0]
-refresh_token = login()[1]
-userid = login()[2]
-orgid = login()[3]
-
-
-org_url = 'http://k8sdev.golowo.com/g3-orgcenter-web/org/querySecondaryOrgTreeData'
+org_url = 'http://k8stest.golowo.com/g3-orgcenter-web/org/querySecondaryOrgTreeData'
 
 infolist = json.loads(requests.get(org_url,headers=access_header('json')).content)['data'][0]['children']
 code_list = []

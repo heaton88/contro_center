@@ -5,7 +5,9 @@
 
 import requests
 import json
-from config_control import access_header,login
+from config_control import access_header,login_screen
+
+login_screen()
 
 interface_url = 'http://k8stest.golowo.com/g3-antiepidemic-web/statichealth/queryProjectReportPercent'
 project_info = []
